@@ -1,0 +1,23 @@
+{
+    "$schema": "https://json-schema.org/draft-04/schema",
+    "required": [
+        "id",
+        "name",
+        "display_name"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "id": {
+            "bsonType": "string"
+        },
+        "name": {
+            "bsonType": "string"
+        },
+        "display_name": {
+            "bsonType": "string"
+        },
+        "twitch_id": {
+            "bsonType": "string"
+        }
+    }
+}

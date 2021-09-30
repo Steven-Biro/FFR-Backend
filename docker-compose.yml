@@ -1,0 +1,55 @@
+version: "3.8"
+services:
+  mongodb:
+    image: mongo:4.4.3-bionic
+    container_name: mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: ffrdb
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - ./packages/MongoDB/mongo-entrypoint:/docker-entrypoint-initdb.d
+      - mongodbdata:/data/db
+      - mongoconfig:/data/configdb
+    ports:
+      - '27017-27019:27017-27019'
+    networks:
+      - mongo_net
+
+  ffrbot:
+    build: packages/FFR-Bot
+    image: fiendsoftheelements/ffr-bot:latest
+    container_name: ffrbot
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+    networks:
+      - mongo_net
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+    depends_on:
+      - mongodb
+    networks:
+      - mongo_net
+
+
+volumes:
+  mongodbdata:
+  mongoconfig:
+
+
+networks:
+  mongo_net:
+    driver: bridge
+
+

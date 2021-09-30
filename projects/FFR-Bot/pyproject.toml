@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "ffr_bot"
+version = "0.1.0"
+description = "A discord bot for the FFR discord"
+authors = ["Steven Biro <steven.biro@mail.utoronto.ca>"]
+license = "GPLv3"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+"discord.py" = "^1.6.0"
+redis = "3.5.3"
+pymongo = "^3.11.2"
+
+[tool.poetry.dev-dependencies]
+watchgod = "^0.6"
+
+[tool.poetry.scripts]
+dev = "ffr_bot.main:start"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

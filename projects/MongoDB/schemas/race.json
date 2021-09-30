@@ -1,0 +1,83 @@
+{
+    "$schema": "https://json-schema.org/draft-04/schema",
+    "required": [
+        "async",
+        "id",
+        "name",
+        "flags",
+        "role_id",
+        "channel_id",
+        "owner_id",
+        "runners"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "async": {
+            "bsonType": "bool"
+        },
+        "id": {
+            "bsonType": "string"
+        },
+        "name": {
+            "bsonType": "string"
+        },
+        "flags": {
+            "bsonType": "string"
+        },
+        "flags_msg_id": {
+            "bsonType": "string"
+        },
+        "role_id": {
+            "bsonType": "string"
+        },
+        "channel_id": {
+            "bsonType": "string"
+        },
+        "announcment_msg_id": {
+            "bsonType": "string"
+        },
+        "owner_id": {
+            "bsonType": "string"
+        },
+        "runners": {
+            "bsonType": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+                "bsonType": "object",
+                "required": [
+                    "user_id",
+                    "ready"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                    "user_id": {
+                        "bsonType": "string"
+                    },
+                    "ready": {
+                        "bsonType": "bool"
+                    },
+                    "end_time": {
+                        "bsonType": "date"
+                    }
+                }
+            },
+            "additionalItems": false
+        },
+        "start_time": {
+            "bsonType": "date"
+        },
+        "started": {
+            "bsonType": "bool"
+        },
+        "end_time": {
+            "bsonType": "date"
+        },
+        "ended": {
+            "bsonType": "bool"
+        },
+        "stream_url": {
+            "bsonType": "string"
+        }
+    }
+}

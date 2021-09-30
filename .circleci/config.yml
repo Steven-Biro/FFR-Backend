@@ -1,0 +1,42 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Dockerize
+          command: |
+            echo $DISCORD_TOKEN > token.txt && \
+            docker login -u $DOCKER_USER -p $DOCKER_PASS && \
+            docker build -t fiendsoftheelements/ffr-bot:latest -f Dockerfile . && \
+            docker push fiendsoftheelements/ffr-bot:latest
+  deploy:
+    docker:
+      - image: circleci/node:8
+    steps:
+      - checkout
+      - run:
+          name: deploy
+          command: |
+            mkdir -p ~/.ssh && \
+            cp .ssh/known_hosts ~/.ssh/known_hosts && \
+            ssh circle@co-op.finalfantasyrandomizer.com "./deployffrbot.sh"
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+

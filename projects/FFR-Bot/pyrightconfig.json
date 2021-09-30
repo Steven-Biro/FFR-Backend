@@ -1,0 +1,12 @@
+{
+  "exclude": [".venv"],
+  "venvPath": "./.venv/",
+  "typingsPath": "./typestubs",
+  "reportTypeshedErrors": false,
+  "reportMissingImports": true,
+  "reportMissingTypeStubs": false,
+  "executionEnvironments": [
+    { "root": "./", "venv": "./.venv", "extraPaths": ["./3rd-modules"] }
+  ],
+  "reportDuplicateImport": true
+}
